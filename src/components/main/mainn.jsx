@@ -1,13 +1,20 @@
 import { Box, Container, Stack, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { color } from "../../constants/color";
-import { Category } from "../index";
+import { Category, Videos } from "../index";
 import { category } from "../../constants";
+import { ApiService } from "../../service/api.service";
 
 const Mainn = () => {
   const [SelectedCategory, SetSelectedCategory] = useState("New");
 
   const SelectedCategoryHandler = (category) => SetSelectedCategory(category);
+  useEffect(()=> {
+    const getData= async() =>{
+      const data= await  ApiService.fetching('search')
+      console.log(data);
+    }
+  }, [])
 
   return (
     <Stack>
@@ -20,6 +27,7 @@ const Mainn = () => {
             {SelectedCategory}{" "}
             <span style={{ color: color.secondary }}>videos</span>
           </Typography>
+          <Videos/>
         </Container>
       </Box>
     </Stack>
