@@ -20,7 +20,7 @@ export const ApiService ={
 
      async fetching(url){
         const response = await axios.get(`${BASE_URL}/${url}` , options)
-        return  response
+        return  response.data
 
      }
 

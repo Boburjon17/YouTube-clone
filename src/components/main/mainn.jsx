@@ -7,13 +7,24 @@ import { ApiService } from "../../service/api.service";
 
 const Mainn = () => {
   const [SelectedCategory, SetSelectedCategory] = useState("New");
+  const [videos, setVideos]= useState([])
 
   const SelectedCategoryHandler = (category) => SetSelectedCategory(category);
+
   useEffect(()=> {
     const getData= async() =>{
-      const data= await  ApiService.fetching('search')
-      console.log(data);
+
+      try {
+        const data= await  ApiService.fetching('search')
+      setVideos(data.items);
+        
+      } catch (error) {
+        console.log(error);
+      }
+      
     }
+
+    getData()
   }, [])
 
   return (
@@ -27,7 +38,8 @@ const Mainn = () => {
             {SelectedCategory}{" "}
             <span style={{ color: color.secondary }}>videos</span>
           </Typography>
-          <Videos/>
+          <Videos videos={videos}  />
+       
         </Container>
       </Box>
     </Stack>
