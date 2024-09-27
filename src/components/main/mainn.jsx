@@ -15,7 +15,7 @@ const Mainn = () => {
     const getData= async() =>{
 
       try {
-        const data= await  ApiService.fetching('search')
+        const data= await  ApiService.fetching(`search?part=snippet&q=${SelectedCategory}`)
       setVideos(data.items);
         
       } catch (error) {
